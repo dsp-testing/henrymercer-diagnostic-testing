@@ -20,11 +20,15 @@ jobs:
 
       - name: Build
         run: javac -classpath dest UsesLomboked.java
+        
+      - run: mkdir results
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
+        with:
+          output: results
         
       - uses: actions/upload-artifact@v2
         with:
           name: sarif-results
-          path: ../results/java-custom.sarif
+          path: results
